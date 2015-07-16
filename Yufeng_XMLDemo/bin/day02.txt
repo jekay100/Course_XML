@@ -1,0 +1,47 @@
+xml的解析器不能用来解析dtd
+dtd不支持命名空间，
+XML更侧重结构化描述内容
+<!ELEMENT book(#PCDATA|price|author)>
+这个是自定义的
+首字母不能数字开头的
+xml的默认字符集是utf-8s
+
+解析xml的方式 ：
+xml是树形结构整个xml文件叫做一个document，解析这个document
+有四种方式，有顺序的越到后面越好
+1.DOM：Document Object Model
+2.SAX: Simple API for Xml
+3.JDOM:综合上面两种方式出现了这一种
+4.DOM4J：是JDOM的一部分，分支
+上面的是四种API
+1.DOM：
+xml文档是树形结构。DOM解析器（其实就是些API）把整个树装到内存中去，然后开始解析
+整个树构造完毕以后才开始解析，在节点之间移动
+好处：可以在节点间移动，获取数据，修改数据，增加节点，删除节点
+缺点：如时机文档过大，装载时间延迟明显2，如果只读一小部分数据，装载整个文档浪费，编码繁杂
+容易使用但罗嗦不是复杂，程序员要学习新的语法 
+适合的文档：文档比较小的结点比较少的
+2.SAX：
+原理：他是一种流的方式。解析可以立即开始。不保存任何结点信息类似于一个水管，SAX解析器相当于水管
+优点：快。只读一小部分数据，不需要全部加载
+缺点：无法在结点间移动，无法修改节点，所以这些API是只读，不涉及修改节点，只读一小部分数据的情况
+
+3JDOM。
+Java API,他还是按照DOM的方式，最大的改变就是对API的改变，直观上改变了DOM API中的繁杂，大量使用了Java中的集合等，原先的DOM是个独立的api
+好处：程序员不需要学习新的语法 
+
+4.DOM4J(for==four)
+JDOM的一个智能分支，扩充了灵活性，增加了一些额外的功能，目前性能最好的xml api
+hibernate 使用dom4j作为自己的xml解析器
+dom4j-1.6.1.zip,解压后有个dom4j-1.6.1.jar把它放在lib里面去
+然后在工程上右键BuidPath（构建路径）然后配置然后第二个（增加外部jar包）
+整个树叫document
+
+1)ReadXML
+//根据传入的文件名获取文档对象
+public Document read(String fiileName)
+//根据传入的doc对象获得根元素
+public Element getRootElement(Document doc)
+//获得元素root下的子元素并打印元素内容及属性
+public void list(Element root)
+

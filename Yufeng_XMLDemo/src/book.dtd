@@ -1,0 +1,15 @@
+<!-- 用DTD描述我们的东西在程序的角度来约束 -->
+<!-- 写上这一句出现并列了并且通过什么来保证语法格式是DTD加上个doctype -->
+<!--<!DOCTYPE 书籍列表 [-->
+<!--把上面的那个删除了，亲-->
+<!ELEMENT 书籍列表 (计算机书籍)* >
+<!ELEMENT 计算机书籍 (书名,价格,作者+, 性别？,地址|电话, 简介, hr) >
+<!ELEMENT 书名 (#PCDATA) >
+<!ELEMENT 价格 (#PCDATA) >
+<!ELEMENT 作者 (#PCDATA)>
+<!ELEMENT 简介 (#PCDATA) >
+<!ELEMENT 性别 (#PCDATA)>
+<!ELEMENT 电话 (#PCDATA) >
+<!ELEMENT 地址 (#PCDATA)>
+<!ELEMENT hr EMPTY>
+>

@@ -1,0 +1,232 @@
+xml:
+一.xml基础
+二.xml语法
+三.DTD文件格式（查一下）
+------解析--------------
+四。Java api for xml
+五。XPath
+xml和数据库一样全是数据的载体
+一天学习占总知识的80%，数据库1周不到10%
+
+
+-xml基础
+提到xml就不得不提到与xml关系密切的标记语言
+1.html:hyper text markup language超文本标记语言
+用标记来表达的语言叫标记语言，链接等表现丰富的东西全是html经过浏览器加工之后（分析，解析）展示出来
+B/S模式：browser(html)/ service
+C/S模式：client/Service
+---------可以学习一下html语法
+html启到非常重要的作用推动网络发展
+html的形式
+<h1>我的第一个页面</h1>
+<img src ="my.png>就能显示my.png文件做复杂工作的是浏览器，它解析了
+标记语言的特点是一个左尖括号一个右括号还有/
+html的主要功能就是展示，内容和显示方式结合在一起，主要目的把内容展示出来
+特点：标记<h1>不可扩展(标记库是不能增加的就是规定那几个)
+
+2.xml和html是亲戚，
+<h1>我的xml内容</h1>
+<t1>我的内容</t1>
+xml：可扩展的标记语言
+xml目的：数据（内在）html是显示（外表）
+xml和html是兄弟，由于目的不同越走越远，html语法要求不烟，所以丢了最后尖括号也行了
+xml就不行
+xml和html在各自领域都发展的很好没有谁想取代谁的问题
+xml属于哪个机构的公司(w3c(world wide web consortium万维网的一个协会,是开源的,网址：w3.org)),html
+互联网和万维网的区别
+在官网学习：w3.org
+xml的主要用途：
+交换数据/保存数据/配置文件
+交换数据：在两个不同的系统（异构系统）之间交换数据（把一个表插入另一个表中，用xml，xml做为一个中间的载体）
+看到一个城市里面所有用户的数据，就是用xml,生产机一直要运行（它是一线的）不能直接要，我们在低峰期生成xml,,我们管理系统感觉1个小时他做完了，所以读xml,xml的作用交换数据的载体，管理机和生产机约定个格式，这样就好了
+保存数据：数据备份到xml里面，上面的那个例子也说了xml是个保存数据，xml作为血仇 
+牛新庄：查一下这个人
+配置文件：软件开发中用到的三大框架SSH（struts , hibernate, spring）他们全用xml配置文件
+
+properties一下步升级到xml配置文件
+======================
+二。xml语法
+html / xml
+
+书：xml的前世今生
+价格：55.00元
+简介：一本关于xml发展历程的书
+用这两种语言展示出表格的效果
+用记事本写，book.html,book.xml
+html是成对出现的标签
+html的语法有很多工具可以帮助我们实现 
+下面的table里面有格式代码我们也可以改书名加上个居中之类的
+<html>
+<head>//浏览器的左上角
+	<title>我的书籍</title>--页面的标题--
+</head>
+<body>html里面的等号不要加空格因为border="1"就是一个属性不要加括号，我们给table属性border(边框)table边框的值
+	<table 这个是属性border="1"(高度) width= "300"（宽度）align="center">        table在数据库里面叫表在html里面叫表格
+	<tr><td><h1><b>书名</b>(加粗)</h1></td><td>价格</td><td>简介</td>(一列)</tr>
+</table>
+</body>
+</html>，html格式代码超过了数据，
+上面的是html的文件，一个标记就是左尖括号和右尖括号括起来的字符串开始标记，结束标记就是有/的，标记是不能自定义的有特定函义的
+下面写xml文件
+怎么定义
+<?xml version="1.0" encoding="gbk"?>
+<书籍列表>，这些标签可以约定好了
+  <计算机书籍>
+    <书名>xml的前世今生</书名>
+    <价格>55.00</价格>
+    <简介>一本关于xml的书</简介>
+  </计算机书籍>
+</书籍列表>
+解析器：
+html:浏览器
+xml:浏览器/开发工具（eclipse）/专用工具（xml spy）做的最好的
+
+开发工具：
+html:记事本 / Dream Weaver /
+xml：记事本/Exlipse/xml spy最专业的（使用习惯非常大）
+MyEclipse里面有专门的xml编辑器
+
+xml语法特点：
+1xml的声明：<?xml version="1.0" encoding="gbk"?>,不写编码默认是utf-8
+2标记：就是这样的形式<计算机书籍>，有开始标记和结束标记，必须同时出现
+标记有时也叫标签
+3元素：<书名>xml的前世今生</书名>这一串就是元素
+出现了根元素，最外层的就是根元素好像包括里面的了吧
+这个xml文件可以画成个树，xml结构是个树形结构
+一个xml文件只能有一个根元素
+4实体引用：我想在书名的前后加上书名号，书名号与标记的开始相同了
+我想表达小于号<:less than : &lt;
+大于号：great than &gt;&gt;最主要的实体引用就这两个
+5属性：一个键值对保存在开始标记里面叫属性,属性必须有值，属性值必须用引号引起来
+<书名 hot="true" lang="zh">
+6CDATA:忽略所有实体引用的纯文本：
+<简介>一本关于xml的书</简介>忽略了所有的实体引用 原样显示
+
+<简介<![CDATA[一本<<>>关于xml的书]]>></简介>这里面的书名号按原样显示出来
+7注释：
+java:// /*..*/
+oracle:-- /*..*/
+xml：<!--..-->加在任何地方是可以但是不能往标签内部
+html:<!--..-->
+8节点：node(一个开始标记和结束标记包括中间的东西)
+叶子结点就是里面没有子结点
+结点和元素的区别
+9大小写敏感<name></Name>这个是不对
+标记不可嵌套
+对的<a><b></b></a>
+错的<a><b></a></b>
+10格式良好的xml文件：well-formed
+遵循所有xml语法的xml文件
+11命名空间：namespace,下面的有两个table一个是桌子，一个是表格，所以我们要加前缀，表示这个标记来自不同的结构这叫命名空间，如遇见table了它会看f,w判断
+<f:table>
+	<f:fruit>apple</f:fruit>
+	<f:price>5</f:price>
+</f:table>
+<w:table>
+	<w:size>1500*800</w:size>
+	<w:meterial>wood</w:meterial>
+	<w:price>500</w:price>
+</w:table>
+
+三。DTD
+Document Type Defination
+html / xml:标记是否可自定义
+html标记：html/head/title/body/table/tr（行）/td/(列)font/h1大字体。。/h6最小字体<img>图片
+xml自定义必须双方约定好两面说明好做好约定，这种约定由DTD来处理，如果是第三方要用了你怎么告诉它格式了，这时要用到DTD
+
+DTD就是用来约束当前的xml必须遵循的规则，
+DTD里面定义了标记的格式，定义，多少个标记，一但DTD定义下来xml就要遵循了
+
+限制xml格式
+书籍列表：根元素
+计算机书籍：在书籍列表中可以有多个元素
+计算机书籍：书名，价格，简介，必须有序排列
+怎么写这个文件呢
+格式良好的（well-formed叫格式良好的，再遵循DTD的规定叫有效的xml文档）
+
+符号：
+*：0-多个
+，
++：1-多个
+|:二者只能取其一，只能出现一个
+
+<!ELEMENT 标记名称 （子元素，子元素。。。。）>
+注意事项：
+1）标记名称后面有空格
+2）#PCDATA是可以存放文本，CDATA,叶子元素用#PCDATA
+3）DTD中必须定义所有的结点，这些ELEMENT是可以没有顺序的
+
+
+元素和结点是一样的我们，只在xml里面时说元素，在解析xml时说结点
+
+
+<!DOCTYPE 书籍列表 [
+<!ELEMENT 书籍列表 (计算机书籍)* >
+<!ELEMENT 计算机书籍 ((书名,价格)+这个是成组出现的也就是这一组能出现多次,作者+，简介这里面是有顺序的下面可以是无序的) >
+<!ELEMENT 书名 (#PCDATA) >
+<!ELEMENT 价格 (#PCDATA) >
+<!ELEMENT 作者 (#PCDATA) >
+<!ELEMENT 简介 (#PCDATA) >
+]>
+：浏览器主要针对html，但是不主要针对xml,浏览器报错不一定错，
+xml:浏览器，MyEclipse, xml spy(最专业)
+空元素：在开始标记和结束标记间无内容<td hot="true"></td> = <td/>
+空元素在程序里面的写法
+<br>在html里面是回车，换行
+
+属性：也要在DTD里面声明 不声明也不行
+希望给作者元素增加一些特性，
+电话，职务，爱好，性别
+<作者 电话=“1234” 职务="魔教教主",爱好=“赵敏”>张无忌</作者>
+属性格式：ATTLIST == Attribute List属性列表 
+<ATTLIST 元素名称  属性名  属性类  默认值>
+<ATTLIST 作者 电话 CDATA 职务 CDATA “作家”
+
+<!ATTLIST 作者
+	性别 ( 男 |女) ”男“
+	年龄CDATA #IMPLIED(可选的)
+	联系电话 CDATA #REQUIRED(必须的的)
+	职务 CDATA #FIXED "作家" ，，这个是固定的
+	个人爱好 CDATA "聊天"
+	>
+先有DTD，再有xml	
+	提供方先根据JDBC查表然后根据xml的API写入xml里面
+	需求方Java io api把xml解析出来导入表中
+SYSTEM是个人的DTD
+PUBLIC是通用的行业公用的
+在哪里标称我们的DTD是SYSTEM的还是PUBLIC的
+把dtd和xml写在一起会出现什么了
+当多个xml文件需要共享同一个dtd时，这个时候冗余太多了，如果dtd改的时候每个全要改,不便修改
+分离xml和dtd.
+<!DOCTYPE 书籍列表（根元素） SYSTEM "book.dtd">
+<!DOCTYPE struts PUBLIC "apache-struts2.0" "http://struts.apache.org/struts2.0.dtd">他先查一下这个文件有没有没有的话他会去上网找，这个就是行业公用的
+
+MyEclipse中验证xml文件格式的方式：
+在xml文件上按右键-》MyEclipse->run validation
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE 购物篮[
+	<!ELEMENT 购物篮 ANY>
+	<!ELEMENT 肉 EMPTY>
+	<!ATTLIST 肉 类型(鸡肉 | 牛肉 | 猪肉 | 鱼肉) "鸡肉"
+]>
+<购物篮>
+	<肉 类型="鱼肉"/>
+	<肉 类型="牛肉"/>
+	<肉/>
+</购物篮>
+属性的枚举类型，enum
+xml大小写敏感
+
+
+
+
+
+
+
+
+
+
+
+
+
+
